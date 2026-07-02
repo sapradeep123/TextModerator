@@ -1,0 +1,37 @@
+{
+  "name": "friendly-text-moderator",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A production-quality web application for AI-powered text content moderation using Hugging Face models",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.1",
+    "eslint": "^9.9.0",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^5.1.0-rc.0",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "vite": "^5.4.1"
+  },
+  "keywords": [
+    "text-moderation",
+    "ai",
+    "huggingface",
+    "toxicity-detection",
+    "content-safety",
+    "react",
+    "vite"
+  ],
+  "author": "",
+  "license": "MIT"
+}
