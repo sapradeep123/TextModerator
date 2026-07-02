@@ -39,7 +39,11 @@ hfClient.interceptors.response.use(
     const payload = error.response?.data
 
     if (error.code === 'ECONNABORTED' || error.code === 'ERR_NETWORK') {
-      return Promise.reject(new Error('Network error — check your connection and try again.'))
+      return Promise.reject(
+        new Error(
+          'Network error — this is usually caused by an invalid API key (CORS block) or no internet connection. Check your VITE_HF_API_KEY and try again.',
+        ),
+      )
     }
     if (error.code === 'ERR_CANCELED') {
       return Promise.reject(new Error('Request was cancelled.'))
@@ -78,6 +82,14 @@ hfClient.interceptors.response.use(
 export const analyzeText = async (text, signal) => {
   if (!text || typeof text !== 'string' || !text.trim()) {
     throw new Error('Input text must be a non-empty string.')
+  }
+
+  // Guard before making the request — a missing key causes a CORS network error
+  // in the browser (HF doesn't return CORS headers for unauthenticated requests).
+  if (!HF_API_KEY || HF_API_KEY === 'hf_your_api_key_here') {
+    throw new Error(
+      'Hugging Face API key is not configured. Add VITE_HF_API_KEY to your environment variables.',
+    )
   }
 
   const { data } = await hfClient.post('', { inputs: text.trim() }, { signal })
